@@ -593,7 +593,7 @@ export const contactData = {
       subtitle: 'Currently based in Santo Domingo, DR.', 
       value: 'Open to remote and hybrid roles.', 
       link: null 
-    },,
+    },
   ],
   socialLinks: [
     { id: 1, name: 'LinkedIn', url: 'https://linkedin.com/in/juanmreyesf' },
