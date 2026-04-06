@@ -3,14 +3,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { usePageData } from '@/hooks/usePageData';
-import type { GlobalData } from '@/lib/types';
+import { globalData } from '@/lib/data';
 
 export const TopNavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { data, loading } = usePageData<GlobalData>('/global');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -18,13 +16,10 @@ export const TopNavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (loading) {
-    return <div className="fixed top-0 w-full h-20 bg-white/70 backdrop-blur-xl z-50"></div>;
-  }
-
-  const navItems = data?.navigation?.items || [];
-  const siteName = data?.navigation?.siteName || 'Your name here';
-  const ctaText = data?.navigation?.ctaText || 'Hire Me';
+  const { navigation } = globalData;
+  const navItems = navigation.items;
+  const siteName = navigation.siteName;
+  const ctaText = navigation.ctaText;
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -53,9 +48,9 @@ export const TopNavBar = () => {
           ))}
         </div>
 
-        <button className="bg-orange-600 text-white px-6 py-2 rounded-xl font-bold tracking-tight scale-95 active:scale-100 transition-transform hover:bg-orange-700">
-          {ctaText}
-        </button>
+        <Link href={navigation.ctaRoute} className="bg-orange-600 text-white px-6 py-2 rounded-xl font-bold tracking-tight scale-95 active:scale-100 transition-transform hover:bg-orange-700">
+          {ctaText} 
+        </Link>
 
         <button 
           className="md:hidden flex flex-col gap-1.5 p-2"

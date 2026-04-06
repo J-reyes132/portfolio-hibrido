@@ -1,39 +1,18 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { usePageData } from '@/hooks/usePageData';
-import type { HomeData } from '@/lib/types';
+import Image from 'next/image';
+import { homeData } from '@/lib/data';
+import { DownloadCVButton } from '@/components/DownloadCVButton';
 
 export default function HomePage() {
-  const { data, loading, error } = usePageData<HomeData>('/home');
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600"></div>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-600 text-center">
-          <p className="text-xl font-bold">Error loading data</p>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const { hero, about, skills, projects, experience } = data;
+  const { hero, about, skills, projects, experience } = homeData;
 
   return (
     <div className="relative">
       {/* Organic Background Decorations */}
-      <div className="absolute w-150 h-150 bg-gradient-radial from-orange-600/5 to-transparent -top-24 -left-48 blur-3xl -z-10"></div>
-      <div className="absolute w-150 h-150 bg-gradient-radial from-orange-600/5 to-transparent top-1/2 -right-48 blur-3xl -z-10"></div>
+      <div className="absolute w-[600px] h-[600px] bg-gradient-radial from-orange-600/5 to-transparent -top-24 -left-48 blur-3xl -z-10"></div>
+      <div className="absolute w-[600px] h-[600px] bg-gradient-radial from-orange-600/5 to-transparent top-1/2 -right-48 blur-3xl -z-10"></div>
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-8 py-20 md:py-32 flex flex-col md:flex-row gap-16 items-center">
@@ -48,21 +27,22 @@ export default function HomePage() {
             {hero.description}
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href={hero.ctaLink} className="bg-linear-to-br from-orange-600 to-amber-500 text-white px-8 py-4 rounded-xl font-headline font-bold text-lg shadow-lg shadow-orange-600/10 hover:opacity-90 transition-opacity">
+            <Link href={hero.ctaLink} className="bg-gradient-to-br from-orange-600 to-amber-500 text-white px-8 py-4 rounded-xl font-headline font-bold text-lg shadow-lg shadow-orange-600/10 hover:opacity-90 transition-opacity">
               {hero.ctaText}
             </Link>
-            <button className="bg-[#e5e2e1] text-[#1c1b1b] px-8 py-4 rounded-xl font-headline font-bold text-lg hover:bg-[#ebe7e7] transition-colors">
-              Download CV
-            </button>
+              <DownloadCVButton variant="secondary" />
           </div>
         </div>
         <div className="flex-1 relative">
-          <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
-            <Image src={hero.imageUrl} alt="Juan Manuel Reyes Feliz" fill className="object-cover" />
-          </div>
-          <div className="absolute -bottom-6 -left-6 bg-white/80 backdrop-blur-md p-6 rounded-xl outline outline-[rgba(195,197,217,0.15)] max-w-50">
-            <span className="text-3xl font-headline font-bold text-orange-600 italic">Lead</span>
-            <p className="text-sm font-medium text-[#434656] leading-tight">Driving engineering excellence and team growth</p>
+          <div className="w-full aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
+            <Image 
+              src={hero.imageUrl} 
+              alt="Juan Manuel Reyes Feliz" 
+              width={600}
+              height={600}
+              className="w-full h-full object-cover"
+              loading='eager'
+            />
           </div>
         </div>
       </section>
@@ -86,16 +66,16 @@ export default function HomePage() {
       <section className="py-32 px-8 max-w-7xl mx-auto">
         <h2 className="text-3xl font-headline font-extrabold mb-16">The Tech Stack</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {skills.map((skill) => (
-            <div key={skill.id} className="bg-[#e5e2e1] p-8 rounded-2xl flex flex-col items-center gap-4 group hover:bg-orange-600 transition-colors duration-500">
-              <span className="material-symbols-outlined text-4xl text-orange-600 group-hover:text-white transition-colors">
-                {skill.icon}
-              </span>
-              <span className="font-bold text-sm tracking-widest text-[#434656] group-hover:text-white uppercase text-center">
-                {skill.name}
-              </span>
-            </div>
-          ))}
+        {skills.map((skill) => (
+          <div key={skill.id} className="bg-[#e5e2e1] p-8 rounded-2xl flex flex-col items-center gap-4 group hover:bg-orange-600 transition-colors duration-500">
+            <span className={`material-symbols-outlined ${skill.iconClass}`}>
+              <Image src={skill.icon} alt={skill.name} width={60} height={60} />
+            </span>
+            <span className="font-bold text-sm tracking-widest text-[#434656] group-hover:text-white uppercase text-center">
+              {skill.name}
+            </span>
+          </div>
+        ))}
         </div>
       </section>
 
@@ -110,17 +90,24 @@ export default function HomePage() {
         <div className="space-y-32">
           {projects.map((project, idx) => (
             <div key={project.id} className={`group flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 items-center`}>
-                <div className="relative flex-1 w-full overflow-hidden rounded-xl bg-[#f0edec] transition-transform duration-700 group-hover:scale-[1.02] h-100">
-                  <Image src={project.imageUrl} alt={project.title} fill className="object-cover" />
+              <div className="flex-1 w-full overflow-hidden rounded-xl bg-[#f0edec] transition-transform duration-700 group-hover:scale-[1.02]">
+                <Image src={project.imageUrl} alt={project.title} width={800} height={400} className="w-full h-[200px] object-cover" />
               </div>
               <div className="flex-1 space-y-6">
                 <span className="text-orange-600 font-headline font-black text-6xl opacity-20">{String(idx + 1).padStart(2, '0')}</span>
                 <h3 className="text-3xl font-headline font-bold">{project.title}</h3>
                 <p className="text-lg text-[#434656] leading-relaxed">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIdx) => (
+                    <span key={techIdx} className="px-3 py-1 bg-orange-600/10 text-orange-600 rounded-full text-xs font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
                 <div className="flex gap-4 pt-4">
                   {project.links.map((link, linkIdx) => (
                     <Link key={linkIdx} href={link.url} className="inline-flex items-center gap-2 font-headline font-bold text-orange-600 group/link">
-                      {link.label} <span className="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">arrow_forward</span>
+                      {link.label} <span className="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1"></span>
                     </Link>
                   ))}
                 </div>
@@ -139,7 +126,7 @@ export default function HomePage() {
               <div key={exp.id} className="flex gap-6">
                 <div className="flex flex-col items-center">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white ${idx === 0 ? 'bg-orange-600' : 'bg-[#5d5e64]'}`}>
-                    <span className="material-symbols-outlined">{idx === 0 ? 'leaderboard' : 'work'}</span>
+                    {/* <span className="material-symbols-outlined">{idx === 0 ? 'leaderboard' : 'work'}</span> */}
                   </div>
                   {idx < experience.length - 1 && <div className="w-px flex-1 bg-[#c3c5d9]/30 my-2"></div>}
                 </div>

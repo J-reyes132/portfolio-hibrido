@@ -1,32 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { usePageData } from '@/hooks/usePageData';
-import type { AboutData } from '@/lib/types';
+import Link from 'next/link';
+import { aboutData } from '@/lib/data';
+import { DownloadCVButton } from '@/components/DownloadCVButton';
 
 export default function AboutPage() {
-  const { data, loading, error } = usePageData<AboutData>('/about');
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600"></div>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-600 text-center">
-          <p className="text-xl font-bold">Error loading data</p>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const { hero, education, philosophy, personal, cta } = data;
+  const { hero, education, philosophy, personal, cta } = aboutData;
 
   return (
     <>
@@ -34,9 +14,13 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-8 py-20 flex flex-col md:flex-row items-center gap-16">
         <div className="w-full md:w-1/2 relative">
           <div className="absolute -top-4 -left-4 w-24 h-24 bg-orange-600/10 rounded-full blur-3xl"></div>
-          <div className="relative w-full h-150 overflow-hidden rounded-xl shadow-2xl grayscale transition-all duration-700 hover:grayscale-0">
-            <Image src={hero.imageUrl} alt="Professional portrait" fill className="object-cover" />
-          </div>
+          <Image 
+            src={hero.imageUrl} 
+            alt="Professional portrait" 
+            width={600}
+            height={600}
+            className="w-full h-150 object-cover rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+          />
           <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-orange-600/5 rounded-full blur-3xl"></div>
         </div>
         <div className="w-full md:w-1/2">
@@ -90,8 +74,8 @@ export default function AboutPage() {
               light: 'bg-[#f0edec] p-12 rounded-xl flex flex-col justify-between border border-[#c3c5d9]/10 hover:border-orange-600/30 transition-all',
             };
             return (
-              <div key={item.id} className={variantClasses[item.variant]}>
-                <span className="material-symbols-outlined text-5xl mb-8">{item.icon}</span>
+              <div key={item.id} className={variantClasses[item.variant as keyof typeof variantClasses]}>
+                <Image src={item.icon} alt={item.title} width={60} height={60} />
                 <div>
                   <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
                   <p className="leading-relaxed">{item.description}</p>
@@ -108,14 +92,12 @@ export default function AboutPage() {
           <div className="w-full md:w-1/3">
             <h2 className="text-8xl font-black text-orange-600/10 leading-none mb-4">Beyond</h2>
             <h3 className="text-3xl font-bold text-stone-900 px-2">The Terminal</h3>
-            <p className="mt-8 text-[#434656] px-2">When I&apos;m not optimizing queries or deploying containers, I&apos;m out finding inspiration in the real world.</p>
+            <p className="mt-8 text-[#434656] px-2">When I&apos;m not coding or debugging, I&apos;m out finding inspiration in the real world.</p>
           </div>
           <div className="w-full md:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-4">
             {personal.map((item, idx) => (
               <div key={item.id} className={`space-y-4 ${idx === 1 || idx === 3 ? 'pt-8' : ''}`}>
-                <div className="relative w-full aspect-3/4 overflow-hidden rounded-xl hover:ring-4 hover:ring-orange-600/20 transition-all">
-                  <Image src={item.imageUrl} alt={item.label} fill className="object-cover" />
-                </div>
+                <Image src={item.imageUrl} alt={item.label} width={300} height={400} className="w-full aspect-[3/4] object-cover rounded-xl hover:ring-4 hover:ring-orange-600/20 transition-all" />
                 <span className="text-xs font-bold text-orange-600 uppercase tracking-widest block text-center">{item.label}</span>
               </div>
             ))}
@@ -129,12 +111,11 @@ export default function AboutPage() {
           {cta.title} <span className="text-orange-600">{cta.highlightText}</span>
         </h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20">
-            {cta.primaryButtonText}
-          </button>
-          <button className="border-2 border-stone-200 text-stone-900 px-10 py-4 rounded-full font-bold text-lg hover:border-orange-600 hover:text-orange-600 transition-all">
-            {cta.secondaryButtonText}
-          </button>
+          <Link href={cta.primaryButtonLink} className="bg-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-orange-700 transition-all shadow-lg shadow-orange-600/20 text-center">
+            {cta.primaryButtonText} 
+          </Link>
+          <DownloadCVButton variant="secondary" />
+
         </div>
       </section>
     </>

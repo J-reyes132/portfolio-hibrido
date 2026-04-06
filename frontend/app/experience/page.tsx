@@ -1,31 +1,10 @@
 'use client';
 
-import { usePageData } from '@/hooks/usePageData';
-import type { ExperienceData } from '@/lib/types';
+import Image from 'next/image';
+import { experienceData } from '@/lib/data';
 
 export default function ExperiencePage() {
-  const { data, loading, error } = usePageData<ExperienceData>('/experience');
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600"></div>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-600 text-center">
-          <p className="text-xl font-bold">Error loading data</p>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const { header, roles, cta } = data;
+  const { header, roles, cta } = experienceData;
 
   return (
     <main className="pt-32 pb-24 px-8 max-w-7xl mx-auto">
@@ -46,7 +25,7 @@ export default function ExperiencePage() {
           <section key={role.id} className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             <div className="md:col-span-4 sticky top-32">
               <div className="bg-[#f6f3f2] p-8 rounded-2xl">
-                <img src={role.logoUrl} alt={role.company} className="w-16 h-16 object-contain mb-8 rounded-lg" />
+                <Image src={role.logoUrl} alt={role.company} width={64} height={64} className="w-16 h-16 object-contain mb-8 rounded-lg" />
                 <h2 className="text-2xl font-bold mb-2">{role.title}</h2>
                 <p className="text-stone-500 font-medium mb-6">{role.company}</p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600/10 rounded-full">

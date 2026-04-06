@@ -1,31 +1,10 @@
 'use client';
 
-import { usePageData } from '@/hooks/usePageData';
-import type { ArchitectureData } from '@/lib/types';
+import Image from 'next/image';
+import { architectureData } from '@/lib/data';
 
 export default function ArchitecturePage() {
-  const { data, loading, error } = usePageData<ArchitectureData>('/architecture');
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600"></div>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-600 text-center">
-          <p className="text-xl font-bold">Error loading data</p>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const { header, overview, frontend, backend, fileStructure, cta } = data;
+  const { header, overview, frontend, backend, fileStructure, cta } = architectureData;
 
   return (
     <main className="xl:ml-64 pt-32 pb-20 px-8 max-w-7xl">
@@ -138,7 +117,7 @@ export default function ArchitecturePage() {
             ))}
           </div>
           <div className="bg-[#e5e2e1] rounded-3xl p-1 aspect-square md:aspect-video lg:aspect-square relative overflow-hidden group">
-            <img src={frontend.imageUrl} alt="Coding Interface" className="w-full h-full object-cover rounded-[22px] transition-transform duration-700 group-hover:scale-110" />
+            <Image src={frontend.imageUrl} alt="Coding Interface" width={800} height={800} className="w-full h-full object-cover rounded-[22px] transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1c1b1b]/80 via-transparent to-transparent opacity-60"></div>
             <div className="absolute bottom-8 left-8 right-8">
               <p className="text-white text-sm font-bold uppercase tracking-widest mb-2">Structure Highlight</p>
@@ -190,7 +169,9 @@ export default function ArchitecturePage() {
             </div>
             <div className="space-y-3 font-mono text-sm text-[#434656]">
               {fileStructure.frontend.map((item, idx) => (
-                <div key={idx} className={`flex items-center gap-2 ${idx === 0 ? 'pl-4' : idx === 1 ? 'pl-8' : idx === 2 ? 'pl-8' : idx === 3 ? 'pl-4' : idx === 4 ? 'pl-8' : idx === 5 ? 'pl-8' : idx === 6 ? 'pl-4' : idx === 7 ? 'pl-4' : idx === 8 ? 'pl-4' : 'pl-4'} border-l border-[#c3c5d9]/30`}>
+                <div key={idx} className={`flex items-center gap-2 border-l border-[#c3c5d9]/30 ${
+                  idx === 0 ? 'pl-4' : idx === 1 ? 'pl-8' : idx === 2 ? 'pl-8' : idx === 3 ? 'pl-4' : idx === 4 ? 'pl-8' : idx === 5 ? 'pl-8' : idx === 6 ? 'pl-4' : idx === 7 ? 'pl-4' : 'pl-4'
+                }`}>
                   <span className="text-orange-600 opacity-50">{item.type === 'folder' ? '📂' : '📄'}</span>
                   {item.name}
                   {item.type === 'folder' && <span className="text-[10px] bg-orange-600/10 px-2 py-0.5 rounded text-orange-600">Folder</span>}
@@ -210,7 +191,9 @@ export default function ArchitecturePage() {
             </div>
             <div className="space-y-3 font-mono text-sm text-[#434656]">
               {fileStructure.backend.map((item, idx) => (
-                <div key={idx} className={`flex items-center gap-2 ${idx === 0 ? 'pl-4' : idx === 1 ? 'pl-8' : idx === 2 ? 'pl-8' : idx === 3 ? 'pl-4' : idx === 4 ? 'pl-8' : idx === 5 ? 'pl-8' : idx === 6 ? 'pl-4' : idx === 7 ? 'pl-8' : 'pl-4'} border-l border-[#c3c5d9]/30`}>
+                <div key={idx} className={`flex items-center gap-2 border-l border-[#c3c5d9]/30 ${
+                  idx === 0 ? 'pl-4' : idx === 1 ? 'pl-8' : idx === 2 ? 'pl-8' : idx === 3 ? 'pl-4' : idx === 4 ? 'pl-8' : idx === 5 ? 'pl-8' : idx === 6 ? 'pl-4' : idx === 7 ? 'pl-8' : 'pl-4'
+                }`}>
                   <span className="text-orange-600 opacity-50">{item.type === 'folder' ? '📂' : '📄'}</span>
                   {item.name}
                 </div>

@@ -156,8 +156,8 @@ export interface ArchitectureData {
     features: { icon: string; title: string; description: string }[];
   };
   fileStructure: {
-    frontend: FileStructureNode[];
-    backend: FileStructureNode[];
+    frontend: any[];
+    backend: any[];
   };
   cta: {
     title: string;
