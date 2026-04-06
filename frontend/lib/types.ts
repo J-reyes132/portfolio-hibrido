@@ -155,10 +155,6 @@ export interface ArchitectureData {
     highlight: string;
     features: { icon: string; title: string; description: string }[];
   };
-  fileStructure: {
-    frontend: any[];
-    backend: any[];
-  };
   cta: {
     title: string;
     description: string;
