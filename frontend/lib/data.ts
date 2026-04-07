@@ -32,7 +32,7 @@ export const homeData = {
     subtitle: 'Scalable APIs & Microservices.',
     description: 'Senior Backend Engineer & Team Lead specializing in high-performance distributed systems with Node.js, NestJS, and Laravel.',
     badge: 'Available for projects',
-    imageUrl: '/juan.jpeg',
+    imageUrl: '/Juan.jpeg',
     ctaText: 'View Projects',
     ctaLink: '/works',
   },
@@ -99,7 +99,7 @@ export const aboutData = {
     lastName: 'Reyes Feliz',
     description: 'Specialized in Node.js, NestJS, and Laravel. I focus on crafting scalable APIs and robust microservices architectures that power seamless digital experiences.',
     location: 'Based in Santo Domingo, Working Globally.',
-    imageUrl: '/juan.jpeg',
+    imageUrl: '/Juan.jpeg',
   },
   education: [
     { id: 1, number: '01', title: 'UNIBE', subtitle: 'Bachelor of Engineering in ICT (In Progress)', description: '2023 - Present. Pursuing advanced knowledge in Information and Communication Technologies.' },
