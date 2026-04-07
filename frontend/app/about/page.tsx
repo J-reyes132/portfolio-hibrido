@@ -17,9 +17,9 @@ export default function AboutPage() {
           <Image 
             src={hero.imageUrl} 
             alt="Professional portrait" 
-            width={600}
-            height={600}
-            className="w-full h-150 object-cover rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+            width={800}
+            height={800}
+            className="w-full h-125 object-cover rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
           />
           <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-orange-600/5 rounded-full blur-3xl"></div>
         </div>
@@ -47,9 +47,9 @@ export default function AboutPage() {
             <div className="md:col-span-8 space-y-12">
               {education.map((item) => (
                 <div key={item.id} className="flex gap-8 group">
-                  <span className="text-4xl font-black text-stone-200 group-hover:text-orange-600 transition-colors">{item.number}</span>
+                  <span className="text-4xl font-black text-stone-400 group-hover:text-orange-600 transition-colors">{item.number}</span>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-orange-600 transition-colors">{item.title}</h3>
+                    <h3 className="text-gray-500 text-xl font-bold mb-2 group-hover:text-orange-600 transition-colors">{item.title}</h3>
                     <p className="text-stone-900 font-semibold">{item.subtitle}</p>
                     <p className="text-[#434656] leading-relaxed">{item.description}</p>
                   </div>
@@ -69,9 +69,9 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {philosophy.map((item) => {
             const variantClasses = {
-              default: 'md:col-span-2 bg-[#e5e2e1] p-12 rounded-xl flex flex-col justify-between hover:border-orange-600/30 border border-transparent transition-all',
+              default: 'md:col-span-2 bg-[#9a9998] p-12 rounded-xl flex flex-col justify-between hover:border-orange-600/30 border border-transparent transition-all',
               highlight: 'bg-orange-600 text-white p-12 rounded-xl flex flex-col justify-between relative overflow-hidden',
-              light: 'bg-[#f0edec] p-12 rounded-xl flex flex-col justify-between border border-[#c3c5d9]/10 hover:border-orange-600/30 transition-all',
+              light: 'bg-[#787878] p-12 rounded-xl flex flex-col justify-between border border-[#c3c5d9]/10 hover:border-orange-600/30 transition-all',
             };
             return (
               <div key={item.id} className={variantClasses[item.variant as keyof typeof variantClasses]}>
@@ -90,7 +90,7 @@ export default function AboutPage() {
       <section className="bg-[#fcf9f8] py-32 border-t border-[#c3c5d9]/5">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-end gap-12">
           <div className="w-full md:w-1/3">
-            <h2 className="text-8xl font-black text-orange-600/10 leading-none mb-4">Beyond</h2>
+            <h2 className="text-8xl font-black text-orange-600 leading-none mb-4">Beyond</h2>
             <h3 className="text-3xl font-bold text-stone-900 px-2">The Terminal</h3>
             <p className="mt-8 text-[#434656] px-2">When I&apos;m not coding or debugging, I&apos;m out finding inspiration in the real world.</p>
           </div>

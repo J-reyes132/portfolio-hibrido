@@ -16,7 +16,7 @@ export default function ExperiencePage() {
             {header.title} <br /><span className="text-orange-600">{header.highlight}</span>
           </h1>
         </div>
-        <div className="max-w-sm text-[#434656] text-lg leading-relaxed">{header.description}</div>
+        <div className="max-w-sm text-[#797c90] text-lg leading-relaxed">{header.description}</div>
       </header>
 
       {/* Timeline */}
@@ -26,21 +26,21 @@ export default function ExperiencePage() {
             <div className="md:col-span-4 sticky top-32">
               <div className="bg-[#f6f3f2] p-8 rounded-2xl">
                 <Image src={role.logoUrl} alt={role.company} width={64} height={64} className="w-16 h-16 object-contain mb-8 rounded-lg" />
-                <h2 className="text-2xl font-bold mb-2">{role.title}</h2>
+                <h2 className="text-[#434656] text-2xl font-bold mb-2">{role.title}</h2>
                 <p className="text-stone-500 font-medium mb-6">{role.company}</p>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600/10 rounded-full">
-                  <span className="material-symbols-outlined text-orange-600 scale-75">calendar_today</span>
+                  <span className="material-symbols-outlined text-orange-600 scale-75"></span>
                   <span className="text-sm font-bold text-orange-600">{role.period}</span>
                 </div>
               </div>
             </div>
             <div className="md:col-span-8 space-y-8">
-              <p className="text-lg text-[#434656] leading-relaxed">{role.description}</p>
+              <p className="text-lg text-[#797c90] leading-relaxed">{role.description}</p>
               <ul className="space-y-4">
                 {role.achievements.map((achievement, idx) => (
                   <li key={idx} className="flex items-start gap-4">
                     <span className="bg-orange-600 w-2 h-2 rounded-full mt-2.5 flex-shrink-0"></span>
-                    <span className="text-[#434656]">{achievement}</span>
+                    <span className="text-[#797c90]">{achievement}</span>
                   </li>
                 ))}
               </ul>

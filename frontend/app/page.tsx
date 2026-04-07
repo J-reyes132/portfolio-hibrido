@@ -10,7 +10,6 @@ export default function HomePage() {
 
   return (
     <div className="relative">
-      {/* Organic Background Decorations */}
       <div className="absolute w-[600px] h-[600px] bg-gradient-radial from-orange-600/5 to-transparent -top-24 -left-48 blur-3xl -z-10"></div>
       <div className="absolute w-[600px] h-[600px] bg-gradient-radial from-orange-600/5 to-transparent top-1/2 -right-48 blur-3xl -z-10"></div>
 
@@ -51,7 +50,7 @@ export default function HomePage() {
       <section className="bg-[#f6f3f2] py-32 px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-20">
           <div className="md:w-1/3">
-            <h2 className="text-4xl font-headline font-extrabold tracking-tight">{about.name}</h2>
+            <h2 className="text-amber-700 text-4xl font-headline font-extrabold tracking-tight">{about.name}</h2>
             <div className="mt-4 w-12 h-1 bg-orange-600"></div>
             <p className="mt-6 text-sm font-bold text-orange-600 uppercase tracking-widest">{about.title}</p>
           </div>
@@ -120,7 +119,7 @@ export default function HomePage() {
       {/* Experience Section */}
       <section className="bg-[#f6f3f2] py-32 px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-headline font-extrabold mb-20 text-center">Professional Timeline</h2>
+          <h2 className="text-[#434656] text-4xl font-headline font-extrabold mb-20 text-center">Professional Timeline</h2>
           <div className="max-w-4xl mx-auto">
             {experience.map((exp, idx) => (
               <div key={exp.id} className="flex gap-6">
@@ -132,7 +131,7 @@ export default function HomePage() {
                 </div>
                 <div className="pb-12">
                   <span className="text-sm text-orange-600 font-bold">{exp.period}</span>
-                  <h4 className="text-xl font-headline font-bold mt-2">{exp.title}</h4>
+                  <h4 className="text-[#434656] text-xl font-headline font-bold mt-2">{exp.title}</h4>
                   <p className="text-[#434656] font-medium">{exp.company}</p>
                   <p className="mt-4 text-[#434656] leading-relaxed">{exp.description}</p>
                 </div>

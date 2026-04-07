@@ -79,7 +79,7 @@ export default function ContactPage() {
                 <h3 className="font-bold text-lg mb-4">Digital Presence</h3>
                 <div className="flex flex-wrap gap-3">
                   {socialLinks.map((link) => (
-                    <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-[#f6f3f2] border border-[#c3c5d9]/10 font-semibold hover:bg-orange-600 hover:text-white transition-colors">
+                    <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded-full bg-[#f6f3f2] border border-[#c3c5d9]/10 font-semibold text-[#434656] hover:bg-orange-600 hover:text-white transition-colors">
                       {link.name}
                     </a>
                   ))}

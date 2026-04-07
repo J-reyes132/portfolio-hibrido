@@ -189,7 +189,7 @@ export default function SkillsPage() {
         {/* ── Quote ── */}
         <section className="mt-20 text-center">
           <div className="inline-block max-w-2xl px-12 py-14 bg-white rounded-3xl relative shadow-sm">
-            <span className="text-6xl text-amber-200 absolute -top-5 -left-3 font-serif leading-none">"</span>
+            <span className="text-6xl text-amber-200 absolute -top-5 -left-3 font-serif leading-none"></span>
             <h3 className="text-2xl font-black tracking-tight text-gray-900 mb-4 leading-snug">
               {quote.text}
             </h3>

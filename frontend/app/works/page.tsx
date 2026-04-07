@@ -26,7 +26,7 @@ export default function WorksPage() {
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6">
           {header.title} <span className="text-orange-600">{header.highlight}</span>
         </h1>
-        <p className="text-xl text-[#434656] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-[#797c90] max-w-2xl mx-auto leading-relaxed">
           {header.description}
         </p>
       </header>
@@ -73,7 +73,7 @@ export default function WorksPage() {
               <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">
                 {project.category}
               </span>
-              <h3 className="text-xl font-bold mt-2 mb-3 group-hover:text-orange-600 transition-colors">
+              <h3 className="text-[#434656] text-xl font-bold mt-2 mb-3 group-hover:text-orange-600 transition-colors">
                 {project.title}
               </h3>
               <p className="text-[#434656] text-sm leading-relaxed mb-4 line-clamp-2">
@@ -106,12 +106,12 @@ export default function WorksPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" onClick={() => setSelectedProject(null)}>
           <div className="bg-[#fcf9f8] rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="sticky top-0 bg-[#fcf9f8] p-6 border-b border-[#e5e2e1] flex justify-between items-center">
-              <h2 className="text-2xl font-bold">{selectedProject.title}</h2>
+              <h2 className="text-[#434656] text-2xl font-bold">{selectedProject.title}</h2>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="w-10 h-10 rounded-full bg-[#f0edec] flex items-center justify-center hover:bg-orange-600 hover:text-white transition-colors"
+                className="w-10 h-10 rounded-full bg-[#b4b2b2] flex items-center justify-center hover:bg-orange-600 hover:text-white transition-colors"
               >
-                <span className="material-symbols-outlined">close</span>
+                <span className="material-symbols-outlined">X</span>
               </button>
             </div>
             <div className="p-8">
@@ -122,36 +122,26 @@ export default function WorksPage() {
                 height={400}
                 className="w-full h-80 object-cover rounded-2xl mb-8"
               />
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="bg-[#f0edec] px-4 py-2 rounded-lg">
-                  <span className="text-xs text-[#434656] block">Client</span>
-                  <span className="font-semibold">{selectedProject.client}</span>
-                </div>
-                <div className="bg-[#f0edec] px-4 py-2 rounded-lg">
-                  <span className="text-xs text-[#434656] block">Year</span>
-                  <span className="font-semibold">{selectedProject.year}</span>
-                </div>
-                <div className="bg-[#f0edec] px-4 py-2 rounded-lg">
-                  <span className="text-xs text-[#434656] block">Category</span>
-                  <span className="font-semibold">{selectedProject.category}</span>
-                </div>
-              </div>
               <p className="text-lg text-[#434656] leading-relaxed mb-8">
                 {selectedProject.fullDescription}
               </p>
               <div className="mb-8">
-                <h3 className="text-xl font-bold mb-4">Key Features</h3>
+                <h3 className="text-[#434656] text-xl font-bold mb-4">Key Features</h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedProject.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-[#434656]">
-                      <span className="material-symbols-outlined text-orange-600 text-sm">check_circle</span>
-                      {feature}
+                      <span className="text-amber-500">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </span>
+                       {feature}
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="mb-8">
-                <h3 className="text-xl font-bold mb-4">Technologies Used</h3>
+                <h3 className="text-[#434656] text-xl font-bold mb-4">Technologies Used</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, idx) => (
                     <span key={idx} className="px-3 py-1.5 bg-orange-600/10 text-orange-600 rounded-lg text-sm font-medium">
@@ -168,7 +158,7 @@ export default function WorksPage() {
                     className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-xl font-bold hover:bg-orange-700 transition-all hover:scale-105"
                   >
                     {link.label}
-                    <span className="material-symbols-outlined text-sm">open_in_new</span>
+                    <span className="material-symbols-outlined text-sm"></span>
                   </Link>
                 ))}
               </div>
